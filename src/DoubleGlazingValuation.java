@@ -1,5 +1,5 @@
 
-public class DoubleGlazingValuation implements ValuationStrategyInterface {
+public class DoubleGlazingValuation implements ValuationStrategyInterface , DoubleGlazingInterface  {
 	private double width;
 	private double height;
 	private String glassType;
@@ -7,7 +7,11 @@ public class DoubleGlazingValuation implements ValuationStrategyInterface {
 	private double price;
 	private double area;
 	private double thickness;
+	private double valuationPrice;
 	
+	
+	
+	//set parameters Methods
 	public void setWidth(double width)
 	{
 		this.width = width;
@@ -37,6 +41,23 @@ public class DoubleGlazingValuation implements ValuationStrategyInterface {
 		this.thickness = thickness;
 	}
 
+	
+	//counting Methods
+	public double countArea()
+	{
+		this.area = (getWidth()/10)*(getHeight()/10);
+		return area;
+	}
+	
+	public double countValuationPrice()
+	{
+		this.valuationPrice = area*price;
+		return valuationPrice;
+	}	
+	
+	
+	
+	//get Methods return paramethers getParam()
 	public double getWidth()
 	{
 		return width;

@@ -1,5 +1,5 @@
 
-public class LacobelValuation implements ValuationStrategyInterface {
+public class LacobelValuation implements ValuationStrategyInterface , LacobelValuationInterface {
 	private double width;
 	private double height;
 	private String glassType;
@@ -7,6 +7,7 @@ public class LacobelValuation implements ValuationStrategyInterface {
 	private double area;
 	private double thickness;
 	private String color;
+	private double valuationPrice;
 	public void setWidth(double width)
 	{
 		this.width = width;
@@ -36,6 +37,17 @@ public class LacobelValuation implements ValuationStrategyInterface {
 		this.color = color;
 	}
 	
+	
+	public double countArea()
+	{
+		this.area = (getWidth()/10)*(getHeight()/10);
+		return area;
+	}
+	public double countValuationPrice()
+	{
+		this.valuationPrice = area*price;
+		return valuationPrice;
+	}
 	
 	
 	public double getWidth()

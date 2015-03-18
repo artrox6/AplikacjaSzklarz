@@ -8,7 +8,7 @@ public void setArea(double area);
 public void setThickness(double thickness);
 
 public double countArea();
-public double countPrice();
+public double countValuationPrice();
 
 public double getWidth();
 public double getHeight();

@@ -6,7 +6,7 @@ public class Test
 	public static void main(String[] args)
 	{
 		JFrame frame = new ValuationFrameMobile();
-		frame.setBounds(400, 300, 200, 400);
+		frame.setBounds(400, 400, 200, 400);
 		
 		
 		frame.setTitle("Valuation Frame");

@@ -1,6 +1,8 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class ValuationFrameMobile extends JFrame
+public class ValuationFrameMobile extends JFrame implements ActionListener
 	{
 	private JTextField fWidth;
 	private JTextField fHeight;
@@ -20,17 +22,25 @@ public class ValuationFrameMobile extends JFrame
 	private JComboBox <Integer> cGlassType;
 	private JComboBox <Integer> cThickness;
 	private JButton bValuate;
-
+	FloatValuation GlassSheet = new FloatValuation();
 	public ValuationFrameMobile()
 		{
+		
 		bValuate = new JButton("Valuate");
 		cGlassType = new JComboBox(new Integer[]{10000,10001,10002,10003});
 		cThickness = new JComboBox(new Integer[]{2,4,5,6,8,10,12,19});
-		fWidth = new JTextField("0");
-		fHeight = new JTextField("0");
-		fPrice = new JTextField("0");
-		fArea = new JTextField("0");
-		fPriceV = new JTextField("0");
+		fWidth = new JTextField();
+		fWidth.setText(String.valueOf(GlassSheet.getWidth()));
+		
+		fHeight = new JTextField();
+		fHeight.setText(String.valueOf(GlassSheet.getHeight()));
+		
+		fPrice = new JTextField();
+		fPrice.setText(String.valueOf(GlassSheet.getPrice()));
+		fArea = new JTextField();
+		fArea.setText(String.valueOf(GlassSheet.getArea()));
+		fPriceV = new JTextField();
+		fPriceV.setText(String.valueOf(GlassSheet.getPriceV()));
 		JLabel lWidth = new JLabel("Width");
 		JLabel lHeight = new JLabel("Height");
 		JLabel lPrice = new JLabel("Price");
@@ -141,5 +151,14 @@ public class ValuationFrameMobile extends JFrame
 		constraints.gridheight = 1;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		add(bValuate,constraints);
+		bValuate.addActionListener(this);
 		}
+	public void actionPerformed(ActionEvent e)
+	{
+		GlassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+		GlassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+		GlassSheet.countArea();
+		fArea.setText(String.valueOf(GlassSheet.getArea()));
+	}
+	
 	}

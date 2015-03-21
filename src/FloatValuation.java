@@ -8,7 +8,7 @@ public class FloatValuation implements ValuationStrategyInterface {
 	private double area;
 	private double thickness;
 	private double valuationPrice;
-	
+	private double priceV;
 	//set parameters Methods
 	public void setWidth(double width)
 	{
@@ -26,6 +26,10 @@ public class FloatValuation implements ValuationStrategyInterface {
 	{
 		this.price = price;
 	}
+	public void setPriceV(double priceV)
+	{
+		this.priceV = priceV;
+	}
 	public void setArea(double area)
 	{
 		this.area = area;
@@ -39,7 +43,7 @@ public class FloatValuation implements ValuationStrategyInterface {
 	//counting Methods
 	public double countArea()
 	{
-		this.area = (getWidth()/10)*(getHeight()/10);
+		this.area = (getWidth()/100)*(getHeight()/100);
 		return area;
 	}
 	public double countValuationPrice()
@@ -65,6 +69,10 @@ public class FloatValuation implements ValuationStrategyInterface {
 	public double getPrice()
 	{
 		return price;
+	}
+	public double getPriceV()
+	{
+		return priceV;
 	}
 	public double getArea()
 	{

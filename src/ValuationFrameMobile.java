@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  * Rest of actions are included to ValuationControler Class.
  */
 
-public class ValuationFrameMobile extends JFrame implements ActionListener
+public class ValuationFrameMobile extends JFrame
 	{
 	
 		private JTextField fWidth;
@@ -30,15 +30,35 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 		private JButton bValuate;
 		public FloatValuation GlassSheet = new FloatValuation();
 		
-		public String getTextFText(JTextField textF)
-		{
-			return textF.getText();
-		}
+		//Methods that return TextFields to controller 
 		
 		public JTextField getfWidth()
-		{
-			return fWidth;
-		}
+			{
+				return fWidth;
+			}
+		
+		public JTextField getfHeight()
+			{
+				return fHeight;
+			}
+		
+		public JTextField getfPrice()
+			{
+				return fPrice;
+			}
+		
+		public JTextField getfArea()
+			{
+				return fArea;
+			}
+		
+		public JTextField fPriceV()
+			{
+				return fPriceV;
+			}
+		
+		// GUI constructor 
+		
 		public ValuationFrameMobile()
 			{
 			//Declaring Buttons
@@ -51,10 +71,11 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				cThickness = new JComboBox(new Integer[]{2,4,5,6,8,10,12,19});
 				
 			//Declaring TextFields	
-				
+				Handler h = new Handler();
 				fWidth = new JTextField();
 				fWidth.setText(String.valueOf(GlassSheet.getWidth()));
-			
+				fWidth.addActionListener(h);
+				
 				fHeight = new JTextField();
 				fHeight.setText(String.valueOf(GlassSheet.getHeight()));
 			
@@ -183,14 +204,6 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				constraints.gridheight = 1;
 				constraints.fill = GridBagConstraints.HORIZONTAL;
 				add(bValuate,constraints);
-				bValuate.addActionListener(this);
+				
 			}
-	public void actionPerformed(ActionEvent e)
-	{
-		GlassSheet.setWidth(Double.parseDouble(fWidth.getText()));
-		GlassSheet.setHeight(Double.parseDouble(fHeight.getText()));
-		GlassSheet.countArea();
-		fArea.setText(String.valueOf(GlassSheet.getArea()));
-	}
-	
 	}

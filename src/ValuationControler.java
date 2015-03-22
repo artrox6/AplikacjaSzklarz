@@ -7,6 +7,7 @@ import javax.swing.JFrame;
  * Controller class that includes all listeners connected to TextFields,ComboBoxes and buttons.
  */
 public class ValuationControler {
+	
 	ValuationControler()
 	{
 		ValuationFrameMobile frame = new ValuationFrameMobile();

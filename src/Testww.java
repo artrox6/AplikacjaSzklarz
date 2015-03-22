@@ -11,10 +11,8 @@ public class Testww {
 	         {
 	            public void run()
 	            {
-	               JFrame frame = new ValuationFrameMobile();
-	               frame.setTitle("ValuationFrameMobilet");
-	               frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	               frame.setVisible(true);
+	            	ValuationControler frame = new ValuationControler();
+	             
 	            }
 	         });
 	   }

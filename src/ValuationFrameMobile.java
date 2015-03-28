@@ -12,12 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * Class that build view of GUI, for mobile devices.
+ * Class that build GUI, for mobile devices.
  * Only action performed in this class set starting values of TextFields on 0.
  * Rest of actions are included to ValuationControler Class.
  */
 
-public class ValuationFrameMobile extends JFrame
+public class ValuationFrameMobile extends JFrame implements ActionListener
 	{
 	
 		private JTextField fWidth;
@@ -25,37 +25,11 @@ public class ValuationFrameMobile extends JFrame
 		private JTextField fPrice;
 		private JTextField fArea;
 		private JTextField fPriceV;
-		private JComboBox <Integer> cGlassType;
+		private JComboBox <String> cGlassType;
 		private JComboBox <Integer> cThickness;
 		private JButton bValuate;
-		public FloatValuation GlassSheet = new FloatValuation();
-		
-		//Methods that return TextFields to controller 
-		
-		public JTextField getfWidth()
-			{
-				return fWidth;
-			}
-		
-		public JTextField getfHeight()
-			{
-				return fHeight;
-			}
-		
-		public JTextField getfPrice()
-			{
-				return fPrice;
-			}
-		
-		public JTextField getfArea()
-			{
-				return fArea;
-			}
-		
-		public JTextField fPriceV()
-			{
-				return fPriceV;
-			}
+		//Constructing Float Valuation Object
+		public FloatValuation glassSheet = new FloatValuation();
 		
 		// GUI constructor 
 		
@@ -64,29 +38,48 @@ public class ValuationFrameMobile extends JFrame
 			//Declaring Buttons
 				
 				bValuate = new JButton("Valuate");
+				bValuate.addActionListener(this);
 				
 			//Declaring ComboBox	
 				
-				cGlassType = new JComboBox(new Integer[]{10000,10001,10002,10003});
-				cThickness = new JComboBox(new Integer[]{2,4,5,6,8,10,12,19});
+				cGlassType = new JComboBox();
+				cGlassType.addItem(GlassTypeTable.getGTable(0).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(1).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(2).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(3).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(4).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(5).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(6).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(7).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(8).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(9).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(10).getGName());
+				cGlassType.addItem(GlassTypeTable.getGTable(11).getGName());
+
+				
+				cThickness = new JComboBox(GlassThickness.getfThick());
 				
 			//Declaring TextFields	
-				Handler h = new Handler();
+
 				fWidth = new JTextField();
-				fWidth.setText(String.valueOf(GlassSheet.getWidth()));
-				fWidth.addActionListener(h);
+				fWidth.setText(String.valueOf(glassSheet.getWidth()));
+				fWidth.addActionListener(this);
 				
 				fHeight = new JTextField();
-				fHeight.setText(String.valueOf(GlassSheet.getHeight()));
-			
+				fHeight.setText(String.valueOf(glassSheet.getHeight()));
+				fHeight.addActionListener(this);
+				
 				fPrice = new JTextField();
-				fPrice.setText(String.valueOf(GlassSheet.getPrice()));
-			
+				fPrice.setText(String.valueOf(glassSheet.getPrice()));
+				fPrice.addActionListener(this);
+				
 				fArea = new JTextField();
-				fArea.setText(String.valueOf(GlassSheet.getArea()));
+				fArea.setText(String.valueOf(glassSheet.getArea()));
+				fArea.addActionListener(this);
 				
 				fPriceV = new JTextField();
-				fPriceV.setText(String.valueOf(GlassSheet.getPriceV()));
+				fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+				fPriceV.addActionListener(this);
 				
 			//Declaring Labels
 				
@@ -112,7 +105,6 @@ public class ValuationFrameMobile extends JFrame
 				constraints.gridwidth = 1;
 				constraints.gridheight = 1;
 				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				constraints.ipadx = 100;
 				constraints.ipady = 2;
 				constraints.insets = new Insets(5,5,5,5); 
@@ -122,88 +114,135 @@ public class ValuationFrameMobile extends JFrame
 			
 				constraints.gridx = 0;
 				constraints.gridy = 1;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(lHeight,constraints);
 			
 				constraints.gridx = 0;
 				constraints.gridy = 2;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(lPrice,constraints);
 			
 				constraints.gridx = 0;
 				constraints.gridy = 3;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(lArea,constraints);
 				
 				constraints.gridx = 0;
 				constraints.gridy = 4;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(lGlassType,constraints);
 			
 				constraints.gridx = 0;
 				constraints.gridy = 5;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(lThickness,constraints);
 			
 				constraints.gridx = 0;
 				constraints.gridy = 6;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(lPriceV,constraints);
 			
 			//ComboBox Constraints	
 			
 				constraints.gridx = 1;
 				constraints.gridy = 4;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(cGlassType,constraints);
 			
 	
 				constraints.gridx = 1;
 				constraints.gridy = 5;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.fill = GridBagConstraints.CENTER;
 				add(cThickness,constraints);
 			
 			 //TextField Constraints
 			
 				constraints.gridx = 1;
 				constraints.gridy = 0;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
 				add(fWidth,constraints);
 			
 				constraints.gridx = 1;
 				constraints.gridy = 1;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
 				add(fHeight,constraints);
 				
 				constraints.gridx = 1;
 				constraints.gridy = 2;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
 				add(fPrice,constraints);
 				
 				constraints.gridx = 1;
 				constraints.gridy = 3;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
 				add(fArea,constraints);
 				
 				constraints.gridx = 1;
 				constraints.gridy = 6;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
 				add(fPriceV,constraints);
 				
 				constraints.gridx = 0;
 				constraints.gridy = 7;
 				constraints.gridwidth = 2;
 				constraints.gridheight = 1;
-				constraints.fill = GridBagConstraints.HORIZONTAL;
 				add(bValuate,constraints);
 				
 			}
-	}
+
+		@Override
+		//After pushing enter or button program use values from TextFields and start to count Area and PriceV
+		public void actionPerformed(ActionEvent e) {
+			Object source = e.getSource();
+				if (source == bValuate)
+					{
+						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+						glassSheet.setArea(glassSheet.countArea());
+						glassSheet.setPriceV(glassSheet.countValuationPrice());
+						fArea.setText(String.valueOf(glassSheet.getArea()));
+						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+					}
+				if (source == fWidth)
+					{
+						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+						glassSheet.setArea(glassSheet.countArea());
+						glassSheet.setPriceV(glassSheet.countValuationPrice());
+						fArea.setText(String.valueOf(glassSheet.getArea()));
+						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+					}
+				else if (source == fHeight)
+					{
+						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+						glassSheet.setArea(glassSheet.countArea());
+						glassSheet.setPriceV(glassSheet.countValuationPrice());
+						fArea.setText(String.valueOf(glassSheet.getArea()));
+						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+					}
+				else if (source == fPrice)
+					{
+						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+						glassSheet.setArea(glassSheet.countArea());
+						glassSheet.setPriceV(glassSheet.countValuationPrice());
+						fArea.setText(String.valueOf(glassSheet.getArea()));
+						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+					}
+				else if (source == fArea)
+					{
+						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+						glassSheet.setArea(glassSheet.countArea());
+						glassSheet.setPriceV(glassSheet.countValuationPrice());
+						fArea.setText(String.valueOf(glassSheet.getArea()));
+						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+						;
+					}
+				else if (source == fPriceV)
+					{
+						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+						glassSheet.setArea(glassSheet.countArea());
+						glassSheet.setPriceV(glassSheet.countValuationPrice());
+						fArea.setText(String.valueOf(glassSheet.getArea()));
+						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+					}
+				
+			}
+			
+		}

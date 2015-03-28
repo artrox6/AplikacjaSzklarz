@@ -1,6 +1,5 @@
 
 public class FloatValuation implements ValuationStrategyInterface {
-	
 	private double width;
 	private double height;
 	private String glassType;
@@ -9,6 +8,19 @@ public class FloatValuation implements ValuationStrategyInterface {
 	private double thickness;
 	private double valuationPrice;
 	private double priceV;
+	
+	FloatValuation()
+	{
+		 width=0;
+		 height=0;
+		 glassType="";
+		 price=0;
+		 area=0;
+		 thickness=4;
+		 valuationPrice=0;
+		 priceV=0;
+	}
+	
 	//set parameters Methods
 	public void setWidth(double width)
 	{

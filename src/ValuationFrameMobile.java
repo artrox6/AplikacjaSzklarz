@@ -35,11 +35,16 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 		
 		public ValuationFrameMobile()
 			{
-			//Declaring Buttons
+			
 				
-				bValuate = new JButton("Valuate");
-				bValuate.addActionListener(this);
+			
+			
+			
+			//Creating Action Listener Object
 				
+				CountAction count = new CountAction();
+				GlTypeAction glassSelect = new GlTypeAction();
+			
 			//Declaring ComboBox	
 				
 				cGlassType = new JComboBox();
@@ -55,31 +60,37 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				cGlassType.addItem(GlassTypeTable.getGTable(9).getGName());
 				cGlassType.addItem(GlassTypeTable.getGTable(10).getGName());
 				cGlassType.addItem(GlassTypeTable.getGTable(11).getGName());
-
+				cGlassType.addActionListener(glassSelect);
 				
 				cThickness = new JComboBox(GlassThickness.getfThick());
-				
+			//	cThickness.addActionListener();
+			
 			//Declaring TextFields	
-
+				
 				fWidth = new JTextField();
 				fWidth.setText(String.valueOf(glassSheet.getWidth()));
-				fWidth.addActionListener(this);
+				fWidth.addActionListener(count);
 				
 				fHeight = new JTextField();
 				fHeight.setText(String.valueOf(glassSheet.getHeight()));
-				fHeight.addActionListener(this);
+				fHeight.addActionListener(count);
 				
 				fPrice = new JTextField();
 				fPrice.setText(String.valueOf(glassSheet.getPrice()));
-				fPrice.addActionListener(this);
+				fPrice.addActionListener(count);
 				
 				fArea = new JTextField();
 				fArea.setText(String.valueOf(glassSheet.getArea()));
-				fArea.addActionListener(this);
+				fArea.addActionListener(count);
 				
 				fPriceV = new JTextField();
 				fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
-				fPriceV.addActionListener(this);
+				fPriceV.addActionListener(count);
+				
+			//Declaring Buttons
+				
+				bValuate = new JButton("Valuate");
+				bValuate.addActionListener(count);
 				
 			//Declaring Labels
 				
@@ -177,72 +188,34 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				
 			}
 
-		@Override
+	
 		//After pushing enter or button program use values from TextFields and start to count Area and PriceV
-		public void actionPerformed(ActionEvent e) {
-			Object source = e.getSource();
-				if (source == bValuate)
-					{
-						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
-						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
-						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
-						glassSheet.setArea(glassSheet.countArea());
-						glassSheet.setPriceV(glassSheet.countValuationPrice());
-						fArea.setText(String.valueOf(glassSheet.getArea()));
-						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
-					}
-				if (source == fWidth)
-					{
-						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
-						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
-						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
-						glassSheet.setArea(glassSheet.countArea());
-						glassSheet.setPriceV(glassSheet.countValuationPrice());
-						fArea.setText(String.valueOf(glassSheet.getArea()));
-						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
-					}
-				else if (source == fHeight)
-					{
-						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
-						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
-						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
-						glassSheet.setArea(glassSheet.countArea());
-						glassSheet.setPriceV(glassSheet.countValuationPrice());
-						fArea.setText(String.valueOf(glassSheet.getArea()));
-						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
-					}
-				else if (source == fPrice)
-					{
-						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
-						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
-						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
-						glassSheet.setArea(glassSheet.countArea());
-						glassSheet.setPriceV(glassSheet.countValuationPrice());
-						fArea.setText(String.valueOf(glassSheet.getArea()));
-						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
-					}
-				else if (source == fArea)
-					{
-						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
-						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
-						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
-						glassSheet.setArea(glassSheet.countArea());
-						glassSheet.setPriceV(glassSheet.countValuationPrice());
-						fArea.setText(String.valueOf(glassSheet.getArea()));
-						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
-						;
-					}
-				else if (source == fPriceV)
-					{
-						glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
-						glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
-						glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
-						glassSheet.setArea(glassSheet.countArea());
-						glassSheet.setPriceV(glassSheet.countValuationPrice());
-						fArea.setText(String.valueOf(glassSheet.getArea()));
-						fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
-					}
-				
-			}
-			
+		private class CountAction implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+				{
+						
+					glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+					glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+					glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+					glassSheet.setArea(glassSheet.countArea());
+					glassSheet.setPriceV(glassSheet.countValuationPrice());
+					fArea.setText(String.valueOf(glassSheet.getArea()));
+					fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+						
+				}
 		}
+		//After Selecting Glass type in combo box set max size and price for m^2
+			private class GlTypeAction implements ActionListener
+			{
+			public void actionPerformed(ActionEvent e)
+				{
+					{	
+					if(cGlassType.getSelectedItem().equals(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getGName())){
+					glassSheet.setPrice(GlassTypeTable.getGPrice(cGlassType.getSelectedIndex()));
+					fPrice.setText(String.valueOf(glassSheet.getPrice()));
+					System.out.println(glassSheet.getPrice());}
+					}
+				}
+			}
+	}

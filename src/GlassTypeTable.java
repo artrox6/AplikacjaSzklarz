@@ -21,4 +21,8 @@ public class GlassTypeTable {
 	{
 		return glassTable[i];
 	}
+	public static double getGPrice(int i)
+	{
+		return glassTable[i].getGPrice();
+	}
 }	

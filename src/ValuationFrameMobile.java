@@ -48,18 +48,10 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 			//Declaring ComboBox	
 				
 				cGlassType = new JComboBox();
-				cGlassType.addItem(GlassTypeTable.getGTable(0).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(1).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(2).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(3).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(4).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(5).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(6).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(7).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(8).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(9).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(10).getGName());
-				cGlassType.addItem(GlassTypeTable.getGTable(11).getGName());
+				for (int i = 0; i < GlassTypeTable.getGFTable().length; i++ )
+				{
+				cGlassType.addItem(GlassTypeTable.getGTable(i).getGName());
+				}
 				cGlassType.addActionListener(glassSelect);
 				
 				cThickness = new JComboBox(GlassThickness.getfThick());

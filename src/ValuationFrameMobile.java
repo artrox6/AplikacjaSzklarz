@@ -19,15 +19,18 @@ import javax.swing.JTextField;
 
 public class ValuationFrameMobile extends JFrame implements ActionListener
 	{
-	
+		
 		private JTextField fWidth;
 		private JTextField fHeight;
 		private JTextField fPrice;
 		private JTextField fArea;
 		private JTextField fPriceV;
 		private JComboBox <String> cGlassType;
-		private JComboBox <Integer> cThickness;
+		private JComboBox <Double> cThickness;
 		private JButton bValuate;
+		private Double[] tempGlassPrice={};
+		private Double[] tempGlassType={};
+		private Double[] temp={};
 		//Constructing Float Valuation Object
 		public FloatValuation glassSheet = new FloatValuation();
 		
@@ -44,7 +47,7 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				
 				CountAction count = new CountAction();
 				GlTypeAction glassSelect = new GlTypeAction();
-			
+				ThickAction thickSelect = new ThickAction();
 			//Declaring ComboBox	
 				
 				cGlassType = new JComboBox();
@@ -54,8 +57,8 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				}
 				cGlassType.addActionListener(glassSelect);
 				
-				cThickness = new JComboBox(GlassThickness.getfThick());
-			//	cThickness.addActionListener();
+				cThickness = new JComboBox(tempGlassType);
+				cThickness.addActionListener(thickSelect);
 			
 			//Declaring TextFields	
 				
@@ -183,10 +186,10 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 	
 		//After pushing enter or button program use values from TextFields and start to count Area and PriceV
 		private class CountAction implements ActionListener
-		{
+			{
 			public void actionPerformed(ActionEvent e)
 				{
-						
+	
 					glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
 					glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
 					glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
@@ -198,16 +201,42 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				}
 		}
 		//After Selecting Glass type in combo box set max size and price for m^2
-			private class GlTypeAction implements ActionListener
+		private class GlTypeAction implements ActionListener
 			{
 			public void actionPerformed(ActionEvent e)
 				{
-					{	
-					if(cGlassType.getSelectedItem().equals(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getGName())){
-					glassSheet.setPrice(GlassTypeTable.getGPrice(cGlassType.getSelectedIndex()));
-					fPrice.setText(String.valueOf(glassSheet.getPrice()));
-					System.out.println(glassSheet.getPrice());}
+				
+				if(cGlassType.getSelectedItem().equals(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getGName()))
+					{
+						
+						tempGlassType=(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getThickness());
+						cThickness.removeAllItems();
+						tempGlassPrice=(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).geGTPrice());
+						fPrice.setText(String.valueOf((tempGlassPrice[0])));
+					for (int i = 0; i < tempGlassType.length; i++ )
+						{
+						cThickness.addItem(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getThickness(i));
+						}
+					
 					}
+					
 				}
 			}
+		private class ThickAction implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+			
+				
+				
+				if (cThickness!= null)
+				{
+				fPrice.setText(String.valueOf((tempGlassPrice[cThickness.getSelectedIndex()])));
+				glassSheet.setPriceV((tempGlassPrice[cThickness.getSelectedIndex()]));
+				}
+				
+				
+			}
+		}
 	}

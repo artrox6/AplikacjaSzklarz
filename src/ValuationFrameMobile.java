@@ -4,6 +4,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,7 +20,7 @@ import javax.swing.JTextField;
 
 public class ValuationFrameMobile extends JFrame implements ActionListener
 	{
-		
+		private DefaultComboBoxModel model;
 		private JTextField fWidth;
 		private JTextField fHeight;
 		private JTextField fPrice;
@@ -29,7 +30,9 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 		private JComboBox <Double> cThickness;
 		private JButton bValuate;
 		private Double[] tempGlassPrice={};
-		private Double[] tempGlassType={};
+		private Double[] tempGlassThick={};
+		private String[] StringTGlassThick;
+		private String[] StringTGlassPrice;
 		private Double[] temp={};
 		//Constructing Float Valuation Object
 		public FloatValuation glassSheet = new FloatValuation();
@@ -57,7 +60,7 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				}
 				cGlassType.addActionListener(glassSelect);
 				
-				cThickness = new JComboBox(tempGlassType);
+				cThickness = new JComboBox(tempGlassThick);
 				cThickness.addActionListener(thickSelect);
 			
 			//Declaring TextFields	
@@ -208,15 +211,19 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				
 				if(cGlassType.getSelectedItem().equals(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getGName()))
 					{
+					
+						tempGlassThick=(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getThickness());
+						String[] StringTGlassThick= new String[tempGlassThick.length];
+						for (int i = 0; i < tempGlassThick.length; i++ )
+						{
+							StringTGlassThick[i] = String.valueOf(tempGlassThick[i]);
+						}
 						
-						tempGlassType=(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getThickness());
-						cThickness.removeAllItems();
+						DefaultComboBoxModel model = new DefaultComboBoxModel(StringTGlassThick);
+						cThickness.setModel(model);
 						tempGlassPrice=(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).geGTPrice());
 						fPrice.setText(String.valueOf((tempGlassPrice[0])));
-					for (int i = 0; i < tempGlassType.length; i++ )
-						{
-						cThickness.addItem(GlassTypeTable.getGTable(cGlassType.getSelectedIndex()).getThickness(i));
-						}
+				
 					
 					}
 					

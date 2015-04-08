@@ -1,7 +1,7 @@
 
 public class GlassThickness {
 	//Glass thickness for Float type glass
-	private	static Double[] fThick = {2.0,3.0,4.0,6.0,8.0,10.0,12.0,19.0};
+	private	static Double[] fThick = {2.0,3.0,4.0,6.0,8.0,10.0,12.0};
 		
 	//Glass thickness for Opti White
 	private	static Double[] oPWThick = {4.0, 5.0, 6.0, 8.0, 10.0};
@@ -19,7 +19,7 @@ public class GlassThickness {
 	private static Double[] lThick = {4.0};
 	
 	//Glass thickness for Lacomat glass
-	private static Double[] laThick = {4.0,6.0};
+	private static Double[] laThick = {4.0};
 
 	//Glass thickness for Satin glass
 	private static Double[] sThick = {4.0};
@@ -43,7 +43,7 @@ public class GlassThickness {
 	
 	public static Double[] getOPWThick()
 		{
-			return fThick;
+			return oPWThick;
 		}
 	
 	public static Double[] getAThick()

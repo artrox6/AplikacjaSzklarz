@@ -1,3 +1,6 @@
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 
@@ -5,12 +8,18 @@ public class Test
 {
 	public static void main(String[] args)
 	{
-		JFrame frame = new ValuationFrameMobile();
-		frame.setBounds(400, 400, 200, 400);
+	
+	JFrame frame = new ValuationFrameMobile();
+	Toolkit kit = Toolkit.getDefaultToolkit();
+	Dimension screenSize = kit.getScreenSize();
+	int screenWidth = screenSize.width;
+	int screenHeight = screenSize.height;
+	frame.setSize(screenWidth / 2, screenHeight / 2);
+	frame.setLocationByPlatform(true);
+	frame.setTitle("Valuation Frame");
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.setVisible(true);
 		
 		
-		frame.setTitle("Valuation Frame");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
 	}
 }

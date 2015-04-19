@@ -14,8 +14,8 @@ import javax.swing.JComponent;
 public class DrawingMouseComp extends JComponent 
 {
 	
-	private  ArrayList<Rectangle2D> innerCuts;
-	private Rectangle2D current;
+	private  ArrayList<InnerCutShape> innerCuts;
+	private InnerCutShape current;
 	private int x;
 	private int y;
 	//Array that stores all drawings of innercuts
@@ -33,7 +33,7 @@ public class DrawingMouseComp extends JComponent
 		{
 		Graphics2D cut2 = (Graphics2D) cut;
 		
-			for(Rectangle2D i: innerCuts)
+			for(InnerCutShape i: innerCuts)
 			{
 				cut2.draw(i);
 			}
@@ -44,9 +44,9 @@ public class DrawingMouseComp extends JComponent
 	    * @param p point
 	    * @return first innercut that includes point
 	    */
-	public Rectangle2D find (Point2D p)
+	public InnerCutShape find (Point2D p)
 		{
-			for (Rectangle2D i : innerCuts)
+			for (InnerCutShape i : innerCuts)
 				{
 					if(i.contains(p)) 
 					return i;
@@ -62,10 +62,10 @@ public class DrawingMouseComp extends JComponent
 	
 	public void add(Point2D p)
 		{
-			//double x = p.getX();
-			//double y = p.getY();
+			double x = p.getX();
+			double y = p.getY();
 			
-			current = new Rectangle2D.Double(x, y, 0, 0);
+			current = new InnerCutShape(x, y, 0, 0);
 			innerCuts.add(current);
 			repaint();
 		}
@@ -74,7 +74,7 @@ public class DrawingMouseComp extends JComponent
 	    * Remove inerCut from panel and array.
 	    * @param s cut that will be removed
 	    */
-	   public void remove(Rectangle2D s)
+	   public void remove(InnerCutShape s)
 	   {
 	      if (s == null) return;
 	      if (s == current) current = null;
@@ -122,7 +122,7 @@ public class DrawingMouseComp extends JComponent
 	          
 	            // Przeci¹gniêcie aktualnego kwadratu w celu wycentrowania go w punkcie (x, y)
 	           
-	            current.setFrameFromDiagonal(x, y,event.getX(),event.getY());
+	         
 	         	
 	            repaint();
 	            

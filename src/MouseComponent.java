@@ -15,7 +15,7 @@ public class MouseComponent extends JComponent
    private static final int DEFAULT_HEIGHT = 200;
 
    private static final int SIDELENGTH = 10;
-   private ArrayList<Rectangle2D> squares;
+   private ArrayList<InnerCutShape> squares;
    private Rectangle2D current; // kwadrat zawieraj¹cy kursor
 
    public MouseComponent()
@@ -32,7 +32,7 @@ public class MouseComponent extends JComponent
       Graphics2D g2 = (Graphics2D) g;
 
       // Rysowanie wszystkich kwadratów
-      for (Rectangle2D r : squares)
+      for (InnerCutShape r : squares)
          g2.draw(r);
    }
 
@@ -43,7 +43,7 @@ public class MouseComponent extends JComponent
     */
    public Rectangle2D find(Point2D p)
    {
-      for (Rectangle2D r : squares)
+      for (InnerCutShape r : squares)
       {
          if (r.contains(p)) return r;
       }

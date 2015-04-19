@@ -1,6 +1,8 @@
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -35,7 +37,9 @@ public class DrawingMouseComp extends JComponent
 		
 			for(InnerCutShape i: innerCuts)
 			{
-				cut2.draw(i);
+				
+				i.DrawArea(cut2);
+				
 			}
 		}
 	
@@ -65,7 +69,7 @@ public class DrawingMouseComp extends JComponent
 			double x = p.getX();
 			double y = p.getY();
 			
-			current = new InnerCutShape(x, y, 0, 0);
+			current = new InnerCutShape(x, y, 10, 10);
 			innerCuts.add(current);
 			repaint();
 		}
@@ -92,7 +96,7 @@ public class DrawingMouseComp extends JComponent
 	         //if (current == null) 
 	         add(event.getPoint());
 	         x = event.getX();
-	         y =event.getX();
+	         y = event.getX();
 	      }
 	      public void mouseClicked(MouseEvent event)
 	      {

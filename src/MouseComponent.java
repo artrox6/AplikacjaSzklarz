@@ -33,7 +33,7 @@ public class MouseComponent extends JComponent
 
       // Rysowanie wszystkich kwadratów
       for (InnerCutShape r : squares)
-         g2.draw(r);
+       r= new InnerCutShape();
    }
 
    /**

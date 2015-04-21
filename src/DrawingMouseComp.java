@@ -68,10 +68,9 @@ public class DrawingMouseComp extends JComponent
 		{
 			double x = p.getX();
 			double y = p.getY();
-			
-			current = new InnerCutShape(x, y, 10, 10);
+			current = new InnerCutShape(x, y,0,0);
 			innerCuts.add(current);
-			repaint();
+			
 		}
 	 
 	  /**
@@ -97,6 +96,7 @@ public class DrawingMouseComp extends JComponent
 	         add(event.getPoint());
 	         x = event.getX();
 	         y = event.getX();
+	         repaint();
 	      }
 	      public void mouseClicked(MouseEvent event)
 	      {
@@ -120,12 +120,12 @@ public class DrawingMouseComp extends JComponent
 	      {
 	         if (current != null)
 	         {
-	           // int x = event.getX();
-	          //  int y = event.getY();
+	            //int x = event.getX();
+	           // int y = event.getY();
 	          
 	          
 	            // Przeci¹gniêcie aktualnego kwadratu w celu wycentrowania go w punkcie (x, y)
-	           
+	           current = new InnerCutShape(x,y,event.getX(),event.getY());
 	         
 	         	
 	            repaint();

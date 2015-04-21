@@ -64,19 +64,32 @@ public class InnerCutShape extends Area {
 	
 	double x;
 	double y;
-	int width;
-	int height;
+	double x1;
+	double y1;
+	double width;
+	double height;
 	Area a;
-	InnerCutShape(double x, double y, int width, int height)
+	InnerCutShape(double x, double y, double width, double height)
 	{
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-	    
+		a = new Area(new Rectangle2D.Double(this.x, this.y, 1.25* (this.width), 1.25*(this.height)));
 	}
 	
-	
+	InnerCutShape(double x, double y, int x1, int y1)
+	{
+		this.x = x;
+		this.y = y;
+		this.x1 = x1;
+		this.y1 = y1;
+		this.width = 1.25*width;
+		this.height = 1.25*height;
+		Rectangle2D	rect = new Rectangle2D.Double();
+		rect.setFrameFromDiagonal(this.x, this.y,this.x1,this.y1);
+		a = new Area(rect);
+	}
 	
 	
 	public void DrawArea(Graphics2D g2)
@@ -85,13 +98,13 @@ public class InnerCutShape extends Area {
 	  Arc2D arc = new Arc2D.Double(this.x+(this.width/2),(this.y-(this.height/2))+(0.25*(this.width)),this.width,this.height,270,270,Arc2D.OPEN);
 	  Arc2D arc2 = new Arc2D.Double(this.x+(this.width/2),this.y+(this.height/2),this.width,this.height,90,360,Arc2D.OPEN);
 	      
-	  this.a = new Area(new Rectangle2D.Double(this.x, this.y, 1.25* (this.width), 1.25*(this.height)));
+	  //this.a = new Area(new Rectangle2D.Double(this.x, this.y, 1.25* (this.width), 1.25*(this.height)));
 	  Area b = new Area(arc);
 	  Area c = new Area(arc2);
 	  this.a.add(b);
 	  this.a.add(c);
 	  g2.draw(this.a);
-	    
+	
 	    
 	}
 	public Dimension getPreferredSize() { return new Dimension(200,200);}

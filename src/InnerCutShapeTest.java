@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -14,10 +13,8 @@ public class InnerCutShapeTest extends JFrame {
 		JFrame frame = new JFrame();
 		frame.setSize(400, 400);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		InnerCutShape rect = new InnerCutShape(60,60,80,80);
 		
-		frame.add(new InnerCutShape(100,100,100,100),BorderLayout.CENTER);
 		frame.setVisible(true);
-		frame.invalidate();
-		frame.repaint();
 	}
 }

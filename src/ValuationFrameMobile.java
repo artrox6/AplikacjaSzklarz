@@ -38,7 +38,10 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 		public FloatValuation glassSheet = new FloatValuation();
 		
 		// GUI constructor 
-		
+		public FloatValuation getGlass()
+		{
+			return glassSheet;
+		}
 		public ValuationFrameMobile()
 			{
 			
@@ -51,6 +54,7 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				CountAction count = new CountAction();
 				GlTypeAction glassSelect = new GlTypeAction();
 				ThickAction thickSelect = new ThickAction();
+				AreaAction area = new AreaAction();
 			//Declaring ComboBox	
 				
 				cGlassType = new JComboBox();
@@ -79,7 +83,7 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				
 				fArea = new JTextField();
 				fArea.setText(String.valueOf(glassSheet.getArea()));
-				fArea.addActionListener(count);
+				fArea.addActionListener(area);
 				
 				fPriceV = new JTextField();
 				fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
@@ -203,6 +207,18 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 						
 				}
 		}
+		
+		private class AreaAction implements ActionListener
+			{
+			public void actionPerformed(ActionEvent e)
+				{	glassSheet.setWidth(Double.parseDouble(fWidth.getText()));
+					glassSheet.setHeight(Double.parseDouble(fHeight.getText()));
+					glassSheet.setPrice(Double.parseDouble(fPrice.getText()));
+					glassSheet.setArea(Double.parseDouble(fArea.getText()));
+					glassSheet.setPriceV(glassSheet.countValuationPrice());
+					fPriceV.setText(String.valueOf(glassSheet.getPriceV()));
+				}
+			}
 		//After Selecting Glass type in combo box set max size and price for m^2
 		private class GlTypeAction implements ActionListener
 			{

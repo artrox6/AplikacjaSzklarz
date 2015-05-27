@@ -1,29 +1,21 @@
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Shape;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
+import java.util.*;
+import javax.swing.*;
 
-import javax.swing.JComponent;
 
 	
 public class DrawingMouseComp extends JComponent 
 {
-	
-	private  ArrayList<InnerCutShape> innerCuts;
-	private InnerCutShape current;
-	private int x;
-	private int y;
 	//Array that stores all drawings of innercuts
+	private ArrayList<InnerCutShape> innerCuts;
+	private InnerCutShape current;
+
+	
 	public DrawingMouseComp()
 		{
-			innerCuts = new ArrayList<>();
+			innerCuts = new ArrayList<InnerCutShape>();
 			current = null;
 			addMouseListener(new MouseHandler());
 			addMouseMotionListener(new MouseMotionHandler());
@@ -37,9 +29,7 @@ public class DrawingMouseComp extends JComponent
 		
 			for(InnerCutShape i: innerCuts)
 			{
-				
-				i.DrawArea(cut2);
-				
+				cut2.draw(i.getCut());
 			}
 		}
 	
@@ -52,8 +42,8 @@ public class DrawingMouseComp extends JComponent
 		{
 			for (InnerCutShape i : innerCuts)
 				{
-					if(i.contains(p)) 
-					return i;
+					if (i.contains(p)) return i;
+					
 				}
 			return null;
 		}
@@ -68,9 +58,10 @@ public class DrawingMouseComp extends JComponent
 		{
 			double x = p.getX();
 			double y = p.getY();
-			current = new InnerCutShape(x, y,0,0);
-			innerCuts.add(current);
 			
+			current = new InnerCutShape(x,y,60,60);
+			innerCuts.add(current);
+			repaint();
 		}
 	 
 	  /**
@@ -90,50 +81,44 @@ public class DrawingMouseComp extends JComponent
 	   {
 	      public void mousePressed(MouseEvent event)
 	      {
-	         // Dodanie nowego kwadratu, jeœli kursor nie jest wewn¹trz innego kwadratu
+	         // Dodanie nowego ksztaltu, jeœli kursor nie jest wewn¹trz innego kwadratu
 	         current = find(event.getPoint());
-	         //if (current == null) 
-	         add(event.getPoint());
-	         x = event.getX();
-	         y = event.getX();
-	         repaint();
+	         if (current == null) add(event.getPoint());
+	         
+	            
 	      }
 	      public void mouseClicked(MouseEvent event)
 	      {
-	         // Usuniêcie kwadratu w wyniku jego dwukrotnego klikniêcia
+	         // Usuniêcie ksztaltu w wyniku jego dwukrotnego klikniêcia
 	         current = find(event.getPoint());
 	         if (current != null && event.getClickCount() >= 2) remove(current);
+	         
 	      }
 	   }
-	   private class MouseMotionHandler implements MouseMotionListener
+	 private class MouseMotionHandler implements MouseMotionListener
 	   {
 	      public void mouseMoved(MouseEvent event)
 	      {
 	         // Ustawienie kursora na krzy¿yk, jeœli znajduje siê wewn¹trz
 	         // kwadratu
 
-	         if (find(event.getPoint()) == null) setCursor(Cursor.getDefaultCursor());
-	         else setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+	        if (find(event.getPoint()) == null) setCursor(Cursor.getDefaultCursor());
+	        else setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 	      }
 
 	      public void mouseDragged(MouseEvent event)
 	      {
 	         if (current != null)
 	         {
-	            //int x = event.getX();
-	           // int y = event.getY();
-	          
-	          
-	            // Przeci¹gniêcie aktualnego kwadratu w celu wycentrowania go w punkcie (x, y)
-	           current = new InnerCutShape(x,y,event.getX(),event.getY());
+	            int x = event.getX();
+	            int y = event.getY();
+
 	         
-	         	
-	            repaint();
-	            
-	            {
-	            	
-	            }
 	         }
 	      }
 	   }
-}
+	   
+	   public Dimension getPreferredSize() { return new Dimension(300, 300); }
+	}
+
+	   

@@ -19,7 +19,13 @@ public class Test
 	frame.setTitle("Valuation Frame");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setVisible(true);
+	ValuationFrameMobile qq= new ValuationFrameMobile();
 		
-		
+	
+	/// przekazanie obiekltu wewnetrznego z innej klasy !!!!!!!!!!!!!!!!!!!!!!!
+	FloatValuation j = new FloatValuation();
+		j = qq.getGlass();
+	
+		(qq.getGlass()).setWidth(2.0);
 	}
 }

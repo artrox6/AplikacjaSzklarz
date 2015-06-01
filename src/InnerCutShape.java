@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
 
 public class InnerCutShape extends Area{
 	
-	
+
 	private Area a;
 	public Area getCut()
 	{
@@ -27,16 +28,17 @@ public class InnerCutShape extends Area{
 
 	InnerCutShape(double x, double y, double width, double height)
 	{
-	
-		Arc2D arc = new Arc2D.Double(x+(width/2),y-(height/2),width,height,270,270,Arc2D.OPEN);
-		Arc2D arc2 = new Arc2D.Double(x+(width/2),y+(height/2),width,height,90,360,Arc2D.OPEN);
-	      
+		
+	//	Arc2D arc = new Arc2D.Double(x+(width/2),y-(height/2),width,height,270,270,Arc2D.OPEN);
+	//	Arc2D arc2 = new Arc2D.Double(x+(width/2),y+(height/2),width,height,90,360,Arc2D.OPEN);
+		Ellipse2D s = new Ellipse2D.Double(x+(width/2),y-(height/2),width,height);
+		Ellipse2D s2 = new Ellipse2D.Double(x+(width/2),y+(height/2),width,height);
 		this.a = new Area(new Rectangle2D.Double(x, y, width, height));
-		Area b = new Area(arc);
-	   	Area c = new Area(arc2);
+		Area b = new Area(s);
+	   	Area c = new Area(s2);
 	   	this.a.add(b);
 	    this.a.add(c);
-	   
+	
 	   
 	}
 	

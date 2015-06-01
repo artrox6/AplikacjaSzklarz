@@ -15,7 +15,7 @@ public class DrawingMouseComp extends JComponent
 	
 	public DrawingMouseComp()
 		{
-			innerCuts = new ArrayList<InnerCutShape>();
+			innerCuts = new ArrayList<>();
 			current = null;
 			addMouseListener(new MouseHandler());
 			addMouseMotionListener(new MouseMotionHandler());
@@ -42,7 +42,7 @@ public class DrawingMouseComp extends JComponent
 		{
 			for (InnerCutShape i : innerCuts)
 				{
-					if (i.contains(p)) return i;
+					if (i.getCut().contains(p)) return i;
 					
 				}
 			return null;

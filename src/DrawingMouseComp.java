@@ -9,14 +9,18 @@ import javax.swing.*;
 public class DrawingMouseComp extends JComponent 
 {
 	//Array that stores all drawings of innercuts
-	private ArrayList<InnerCutShape> innerCuts;
-	private InnerCutShape current;
-
+	private ArrayList<CutInterface> innerCuts;
+	private CutInterface current;
+	public  ShapeToolBar shapechanger = new ShapeToolBar();
 	
+	double x;
+	double y;
+	Point2D punkt;
 	public DrawingMouseComp()
 		{
 			innerCuts = new ArrayList<>();
 			current = null;
+			
 			addMouseListener(new MouseHandler());
 			addMouseMotionListener(new MouseMotionHandler());
 		}
@@ -27,7 +31,7 @@ public class DrawingMouseComp extends JComponent
 		{
 		Graphics2D cut2 = (Graphics2D) cut;
 		
-			for(InnerCutShape i: innerCuts)
+			for(CutInterface i: innerCuts)
 			{
 				cut2.draw(i.getCut());
 			}
@@ -38,9 +42,9 @@ public class DrawingMouseComp extends JComponent
 	    * @param p point
 	    * @return first innercut that includes point
 	    */
-	public InnerCutShape find (Point2D p)
+	public CutInterface find (Point2D p)
 		{
-			for (InnerCutShape i : innerCuts)
+			for (CutInterface i : innerCuts)
 				{
 					if (i.getCut().contains(p)) return i;
 					
@@ -56,11 +60,11 @@ public class DrawingMouseComp extends JComponent
 	
 	public void add(Point2D p)
 		{
-			double x = p.getX();
-			double y = p.getY();
+			this.x = p.getX();
+			this.y = p.getY();
 			
-			current = new InnerCutShape(x,y,60,60);
-			innerCuts.add(current);
+			current = shapechanger.getCutType();
+			//innerCuts.add(current);
 			repaint();
 		}
 	 
@@ -68,7 +72,7 @@ public class DrawingMouseComp extends JComponent
 	    * Remove inerCut from panel and array.
 	    * @param s cut that will be removed
 	    */
-	   public void remove(InnerCutShape s)
+	   public void remove(CutInterface s)
 	   {
 	      if (s == null) return;
 	      if (s == current) current = null;
@@ -84,7 +88,7 @@ public class DrawingMouseComp extends JComponent
 	         // Dodanie nowego ksztaltu, jeœli kursor nie jest wewn¹trz innego kwadratu
 	         current = find(event.getPoint());
 	         if (current == null) add(event.getPoint());
-	         
+	         punkt = event.getPoint();
 	            
 	      }
 	      public void mouseClicked(MouseEvent event)
@@ -92,7 +96,7 @@ public class DrawingMouseComp extends JComponent
 	         // Usuniêcie ksztaltu w wyniku jego dwukrotnego klikniêcia
 	         current = find(event.getPoint());
 	         if (current != null && event.getClickCount() >= 2) remove(current);
-	         
+	         repaint();
 	      }
 	   }
 	 private class MouseMotionHandler implements MouseMotionListener
@@ -110,10 +114,9 @@ public class DrawingMouseComp extends JComponent
 	      {
 	         if (current != null)
 	         {
-	            int x = event.getX();
-	            int y = event.getY();
-
-	         
+	        	 current.setFromDiagonal(punkt,event.getPoint());
+	        	 innerCuts.add(current);
+	        	 repaint();
 	         }
 	      }
 	   }

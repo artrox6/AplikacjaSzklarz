@@ -13,54 +13,44 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 
-public class InnerCutShape extends Area{
+public class InnerCutShape implements CutInterface{
 	
 
 	private Area a;
+	
 	public Area getCut()
-	{
-		return a;
-	}
-	public boolean contains(Point2D p)
-	{
-	return super.contains(p);
-	}
-
-	InnerCutShape(double x, double y, double width, double height)
-	{
+		{
 		
-	//	Arc2D arc = new Arc2D.Double(x+(width/2),y-(height/2),width,height,270,270,Arc2D.OPEN);
-	//	Arc2D arc2 = new Arc2D.Double(x+(width/2),y+(height/2),width,height,90,360,Arc2D.OPEN);
+		return a;
+		}	
+	InnerCutShape()
+		{
+		a = new Area( new Ellipse2D.Double( 50 ,50 , 50 , 50));		}
+	InnerCutShape(double x, double y, double width, double height)
+		{		
 		Ellipse2D s = new Ellipse2D.Double(x+(width/2),y-(height/2),width,height);
 		Ellipse2D s2 = new Ellipse2D.Double(x+(width/2),y+(height/2),width,height);
 		this.a = new Area(new Rectangle2D.Double(x, y, width, height));
 		Area b = new Area(s);
 	   	Area c = new Area(s2);
 	   	this.a.add(b);
-	    this.a.add(c);
+	    this.a.add(c);	    	   
+		}	
 	
-	   
-	}
+	public void setFromDiagonal(Point2D p1,Point2D p2)
+		{	
+		Rectangle2D r = new Rectangle2D.Double();
+	    r.setFrameFromDiagonal(p1.getX(),p1.getY(),p2.getX(),p2.getY());
+	    double width = p2.getX() - p1.getX();
+	    double height= p2.getY() - p1.getY();
+	    Ellipse2D s = new Ellipse2D.Double(p1.getX()+(width/2),p2.getY()-(height/2),width,height);
+	    Ellipse2D s2 = new Ellipse2D.Double(p1.getX()+(width/2),p2.getY()-(height*1.5),width,height);
+	    this.a =new Area(r);
+	    Area b = new Area(s);
+		Area c = new Area(s2);
+	    this.a.add(b);
+		this.a.add(c);
+		}
 	
-	
-	
-	/**public void paintComponent(Graphics g)
-	{	
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		
-	     
-	      Arc2D arc = new Arc2D.Double(this.x+(this.width/2.5),this.y-(this.height/2.5),this.width,this.height,270,270,Arc2D.OPEN);
-	      Arc2D arc2 = new Arc2D.Double(this.x+(this.width/2.5),this.y+(this.height/2.5),this.width,this.height,90,360,Arc2D.OPEN);
-	      
-	      this.a = new Area(new Rectangle2D.Double(this.x, this.y, this.width, this.height));
-	      Area b = new Area(arc);
-	      Area c = new Area(arc2);
-	     this.a.add(b);
-	     this.a.add(c);
-	      g2.draw(a);
-	    
-	    
-	}*/
 	public Dimension getPreferredSize() { return new Dimension(200,200);}
 	}

@@ -32,6 +32,10 @@ public void setFromDiagonal(Point2D p1, Point2D p2)
     double height= p2.getY() - p1.getY();
 	Ellipse2D c1 = new Ellipse2D.Double( p1.getX() , p1.getY() , width , height);
 	Ellipse2D c2 = new Ellipse2D.Double( p1.getX() , p1.getY() + distance , width , height);
+	this.a = new Area(c1);
+	Area a1 = new Area(c2);
+	
+	this.a.add(a1);
 	}
 public void setDistance(double d)
 	{

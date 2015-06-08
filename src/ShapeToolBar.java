@@ -6,19 +6,32 @@ import javax.swing.*;
 
 
 public class ShapeToolBar extends JPanel {
-	private CutInterface curentCut;
-	private DoubleCircle dcircle = new DoubleCircle();
-	private InnerCutShape iCut = new InnerCutShape();
-	ShapeToolBar()
- 	{
 	
-	Action doubleCircleAction = new ShapeAction("Double Circle",new ImageIcon("DoubleCircle.gif"), dcircle );
-	Action innerCutAction = new ShapeAction("Inner Cut",new ImageIcon("InnerCut.gif"), iCut );
-	curentCut = iCut;
+	private DoubleCircle dCircle = new DoubleCircle();
+	private InnerCutShape iCut = new InnerCutShape();
+	private CutInterface curentCut=dCircle;
+	private SingleCircle sCircle = new SingleCircle();
+	private RoundRectCut rRect = new RoundRectCut();
+	public CutInterface getCutType()
+	{
+		return curentCut;
+	}
+	public void setCutType(CutInterface cCut)
+	{
+	this.curentCut = cCut;	
+	}
+	ShapeToolBar()
+	{
 	JToolBar shapeBar = new JToolBar();
+	Action doubleCircleAction = new ShapeAction("Double Circle",new ImageIcon("DoubleCircle.gif"), dCircle );
+	Action innerCutAction = new ShapeAction("Inner Cut",new ImageIcon("InnerCut.gif"), iCut );
+	Action singleCircAction = new ShapeAction("Single Circle", new ImageIcon("SingleCircle.gif"),sCircle );
+	Action roundRectAction = new ShapeAction("Round Rectangle", new ImageIcon("RoundRect.gif"), rRect);
 	shapeBar.add(doubleCircleAction);
 	shapeBar.add(innerCutAction);
-	add(shapeBar, BorderLayout.NORTH);
+	shapeBar.add(singleCircAction);
+	shapeBar.add(roundRectAction);
+	add(shapeBar, BorderLayout.EAST);
 	}
 	
 	
@@ -32,15 +45,14 @@ public class ShapeToolBar extends JPanel {
 			putValue(Action.SMALL_ICON, icon);
 			putValue(Action.SHORT_DESCRIPTION, name +" shape of cut");
 			putValue("CutInterface", cut);
+			//System.out.println(name);
 		}
 		public void actionPerformed(ActionEvent event)
 	    {
-	         CutInterface c = (CutInterface) getValue("CutInterface");
-	         curentCut=c;
+	         CutInterface c = (CutInterface)getValue("CutInterface");
+	         setCutType(c);
+	         System.out.println("Wysylam " + curentCut);
 	    }
 	}
-	public CutInterface getCutType()
-	{
-		return curentCut;
-	}
+	
 }

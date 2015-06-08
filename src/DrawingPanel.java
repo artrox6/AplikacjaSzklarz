@@ -14,6 +14,13 @@ import javax.swing.JPanel;
 public class DrawingPanel extends JPanel
 {
 	
+	
+	public DrawingMouseComp getMouse()
+	{
+	return component;	
+	}
+	
+	private DrawingMouseComp component = new DrawingMouseComp();
 	DrawingPanel()
 	{
 		JPanel drawpane = new JPanel();
@@ -23,10 +30,7 @@ public class DrawingPanel extends JPanel
 		drawpane.setPreferredSize(new Dimension(500,500));
 		drawpane.setLayout(new BorderLayout());
 		drawpane.setVisible(true);
-		drawpane.setMinimumSize(new Dimension(100,20));
-		DrawingMouseComp component = new DrawingMouseComp();
-		
-	
+		drawpane.setMinimumSize(new Dimension(100,20));		
 		drawpane.add(component);
 		add(drawpane);
 	}

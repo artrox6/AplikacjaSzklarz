@@ -11,7 +11,7 @@ public class DrawingMouseComp extends JComponent
 	//Array that stores all drawings of innercuts
 	private ArrayList<CutInterface> innerCuts;
 	private CutInterface current;
-	public  ShapeToolBar shapechanger = new ShapeToolBar();
+	private ShapeToolBar shapeChanger;
 	
 	double x;
 	double y;
@@ -26,7 +26,16 @@ public class DrawingMouseComp extends JComponent
 		}
 	
 	  //Drawing all inner cuts 
+	public void setToolbar(ShapeToolBar bar)
+	{
+		this.shapeChanger= bar;
+		
+	}
 	
+	public ShapeToolBar getToolbar(ShapeToolBar bar)
+	{
+		return shapeChanger;
+	}
 	public void paintComponent(Graphics cut)
 		{
 		Graphics2D cut2 = (Graphics2D) cut;
@@ -63,8 +72,10 @@ public class DrawingMouseComp extends JComponent
 			this.x = p.getX();
 			this.y = p.getY();
 			
-			current = shapechanger.getCutType();
-			//innerCuts.add(current);
+			current = shapeChanger.getCutType();
+			System.out.println(current);
+			System.out.println(shapeChanger.getCutType());
+			innerCuts.add(current);
 			repaint();
 		}
 	 

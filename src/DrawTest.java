@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 
 public class DrawTest {
-	ShapeToolBar toolBar = new ShapeToolBar();
+	
 public void start(){
 	
 	JFrame frame = new JFrame();
@@ -18,14 +18,16 @@ public void start(){
 	frame.setLocationByPlatform(true);
 	frame.setTitle("Valuation Frame");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setVisible(true);
+	
 	frame.setLayout(new BorderLayout());
 	DrawingPanel pane = new DrawingPanel();
 	frame.add(pane,BorderLayout.CENTER);
 	
+	ShapeToolBar toolBar = new ShapeToolBar();
+	pane.getMouse().setToolbar(toolBar);
 	frame.add(toolBar,BorderLayout.NORTH);
 	pane.getPreferredSize();
-	
+	frame.setVisible(true);
 	frame.invalidate();
 	frame.repaint();
 }

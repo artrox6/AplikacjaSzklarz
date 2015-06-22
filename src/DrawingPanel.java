@@ -27,12 +27,13 @@ public class DrawingPanel extends JPanel
 	
 		drawpane.setBackground(new Color(255, 255, 255));
 		drawpane.setBorder(BorderFactory.createLineBorder(new Color(0,0,0)));
-		drawpane.setPreferredSize(new Dimension(500,500));
+		drawpane.setPreferredSize(new Dimension(300,300));
 		drawpane.setLayout(new BorderLayout());
 		drawpane.setVisible(true);
-		drawpane.setMinimumSize(new Dimension(100,20));		
+		drawpane.setMinimumSize(new Dimension(20,20));		
 		drawpane.add(component);
 		add(drawpane);
+		
 	}
 
 }

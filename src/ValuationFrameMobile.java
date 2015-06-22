@@ -29,6 +29,8 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 		private JComboBox <String> cGlassType;
 		private JComboBox <Double> cThickness;
 		private JButton bValuate;
+		private DrawingPanel dPane;
+		private ShapeToolBar toolBar;
 		private Double[] tempGlassPrice={};
 		private Double[] tempGlassThick={};
 		private String[] StringTGlassThick;
@@ -94,6 +96,13 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				bValuate = new JButton("Valuate");
 				bValuate.addActionListener(count);
 				
+				toolBar = new ShapeToolBar();
+				
+				dPane = new DrawingPanel();
+				dPane.getMouse().setToolbar(toolBar);
+				
+				
+				
 			//Declaring Labels
 				
 				JLabel lWidth = new JLabel("Width");
@@ -111,14 +120,14 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 				GridBagLayout layout = new GridBagLayout();
 				setLayout(layout);
 				GridBagConstraints constraints = new GridBagConstraints();
-				constraints.weightx = 60;
-				constraints.weighty = 60;
+				constraints.weightx = 0;
+				constraints.weighty = 0;
 				constraints.gridx = 0;
-				constraints.gridy = 0;
+				constraints.gridy = 1;
 				constraints.gridwidth = 1;
 				constraints.gridheight = 1;
 				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.ipadx = 100;
+				constraints.ipadx = 40;
 				constraints.ipady = 2;
 				constraints.insets = new Insets(5,5,5,5); 
 				add(lWidth,constraints);
@@ -126,68 +135,79 @@ public class ValuationFrameMobile extends JFrame implements ActionListener
 			//Labels Constraints
 			
 				constraints.gridx = 0;
-				constraints.gridy = 1;
+				constraints.gridy = 2;
 				add(lHeight,constraints);
 			
 				constraints.gridx = 0;
-				constraints.gridy = 2;
+				constraints.gridy = 3;
 				add(lPrice,constraints);
 			
 				constraints.gridx = 0;
-				constraints.gridy = 3;
+				constraints.gridy = 4;
 				add(lArea,constraints);
 				
 				constraints.gridx = 0;
-				constraints.gridy = 4;
+				constraints.gridy = 5;
 				add(lGlassType,constraints);
 			
 				constraints.gridx = 0;
-				constraints.gridy = 5;
+				constraints.gridy = 6;
 				add(lThickness,constraints);
 			
 				constraints.gridx = 0;
-				constraints.gridy = 6;
+				constraints.gridy = 7;
 				add(lPriceV,constraints);
 			
 			//ComboBox Constraints	
 			
 				constraints.gridx = 1;
-				constraints.gridy = 4;
+				constraints.gridy = 5;
 				add(cGlassType,constraints);
 			
 	
 				constraints.gridx = 1;
-				constraints.gridy = 5;
+				constraints.gridy = 6;
 				add(cThickness,constraints);
 			
 			 //TextField Constraints
 			
 				constraints.gridx = 1;
-				constraints.gridy = 0;
+				constraints.gridy = 1;
 				add(fWidth,constraints);
 			
 				constraints.gridx = 1;
-				constraints.gridy = 1;
+				constraints.gridy = 2;
 				add(fHeight,constraints);
 				
 				constraints.gridx = 1;
-				constraints.gridy = 2;
+				constraints.gridy = 3;
 				add(fPrice,constraints);
 				
 				constraints.gridx = 1;
-				constraints.gridy = 3;
+				constraints.gridy = 4;
 				add(fArea,constraints);
 				
 				constraints.gridx = 1;
-				constraints.gridy = 6;
+				constraints.gridy = 7;
 				add(fPriceV,constraints);
 				
 				constraints.gridx = 0;
-				constraints.gridy = 7;
+				constraints.gridy = 8;
 				constraints.gridwidth = 2;
-				constraints.gridheight = 1;
+				constraints.gridheight = 0;
 				add(bValuate,constraints);
 				
+				constraints.gridx = 2;
+				constraints.gridy = 1;
+				constraints.gridwidth = 6;
+				constraints.gridheight = 6;
+				add(dPane,constraints);
+				
+				constraints.gridx = 2;
+				constraints.gridy = 0;
+				constraints.gridwidth = 2;
+				constraints.gridheight = 1;
+				add(toolBar,constraints);
 			}
 
 	

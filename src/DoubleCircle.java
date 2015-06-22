@@ -18,7 +18,7 @@ public Area getCut()
 	}
 DoubleCircle (double c1x, double c1y, double distance, double height ,double width )
 	{
-	this.a = new Area();
+	
 	Ellipse2D c1 = new Ellipse2D.Double( c1x , c1y , width , height);
 	Ellipse2D c2 = new Ellipse2D.Double( c1x , c1y + distance , width , height);
 	Area a1 = new Area(c1);
@@ -27,11 +27,14 @@ DoubleCircle (double c1x, double c1y, double distance, double height ,double wid
 	this.a.add(a2);
 	}
 public void setFromDiagonal(Point2D p1, Point2D p2)
+	
+
 	{
-	double width = p2.getX() - p1.getX();
-    double height= p2.getY() - p1.getY();
-	Ellipse2D c1 = new Ellipse2D.Double( p1.getX() , p1.getY() , width , height);
-	Ellipse2D c2 = new Ellipse2D.Double( p1.getX() , p1.getY() + distance , width , height);
+	
+	DiagonalFrame frame = new DiagonalFrame(p1,p2);
+
+	Ellipse2D c1 = new Ellipse2D.Double( frame.getX1() ,frame.getY1() , frame.getX2() - frame.getX1() , frame.getY2() - frame.getY1());
+	Ellipse2D c2 = new Ellipse2D.Double( frame.getX1() , frame.getY1() + distance , frame.getX2() - frame.getX1(), frame.getY2() - frame.getY1());
 	this.a = new Area(c1);
 	Area a1 = new Area(c2);
 	

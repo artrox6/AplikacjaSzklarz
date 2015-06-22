@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.util.*;
+
 import javax.swing.*;
 
 
@@ -15,6 +16,8 @@ public class DrawingMouseComp extends JComponent
 	
 	double x;
 	double y;
+	double x2;
+	double y2;
 	Point2D punkt;
 	public DrawingMouseComp()
 		{
@@ -42,7 +45,18 @@ public class DrawingMouseComp extends JComponent
 		
 			for(CutInterface i: innerCuts)
 			{
+				
+				if(shapeChanger.getAngle()!=0 ||shapeChanger.getAngle()!=360)
+				{
+					cut2.translate(x, y);
+					cut2.rotate(Math.toRadians(shapeChanger.getAngle()));
+					cut2.translate(-x, -y);
+					cut2.draw(i.getCut());
+				}
+				else
+				{
 				cut2.draw(i.getCut());
+				}
 			}
 		}
 	
@@ -97,6 +111,7 @@ public class DrawingMouseComp extends JComponent
 	      public void mousePressed(MouseEvent event)
 	      {
 	         // Dodanie nowego ksztaltu, jeœli kursor nie jest wewn¹trz innego kwadratu
+	    	 
 	         current = find(event.getPoint());
 	         if (current == null) add(event.getPoint());
 	         punkt = event.getPoint();
@@ -126,7 +141,8 @@ public class DrawingMouseComp extends JComponent
 	         if (current != null)
 	         {
 	        	 current.setFromDiagonal(punkt,event.getPoint());
-	        	 innerCuts.add(current);
+	        	 x2=event.getPoint().getX();
+	        	 y2=event.getPoint().getY();
 	        	 repaint();
 	         }
 	      }

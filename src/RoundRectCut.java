@@ -23,7 +23,7 @@ public class RoundRectCut implements CutInterface {
 			}
 		RoundRectCut()
 			{
-				a = new Area(new RoundRectangle2D.Double(0, 0, 0,0, 20, 20));
+				a = new Area(new RoundRectangle2D.Double(0, 0, 0, 0 , 20, 20));
 			}
 
 		RoundRectCut(double x, double y,double width, double height)
